@@ -1,0 +1,45 @@
+<p>
+  ajouter-ligne-de-frais works!
+</p>
+<button type="button" class="btn btn-primary waves-light" data-toggle="modal" data-target="#basicExample" (click)="fluid.show()"
+  mdbWavesEffect>
+  Ajouter un frais
+</button>
+<div mdbModal #fluid="mdb-modal" class="modal fade bottom" id="fullHeightModalRight" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-md modal-bottom" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title w-100" id="myModalLabel">Ajout d'une ligne de frais</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="fluid.hide()">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form (ngSubmit)="submit(ajouterFraisForm.value)" #ajouterFraisForm="ngForm" name="form-ajouter-ligne-de-frais" id="form-ajouter-ligne-de-frais">
+          <div class="md-form">
+            <label for="dateFrais">Date</label>
+            <input id="dateFrais" #dateFrais="ngModel" [(ngModel)]="frais.date" name="date" type="date" class="form-control" placeholder="jj/mm/aaaa"
+              required mdbActive>
+          </div>
+          <div class="md-form">
+            <select id="natureFrais" #natureFrais="ngModel" class="custom-select" name="nature" [(ngModel)]="frais.nature" required mdbActive>
+              <option *ngFor="let n of natures" [ngValue]="n">{{ n }}</option>
+            </select>
+            <label for="natureFrais">Quelle nature ?</label>
+          </div>
+          <div class="md-form">
+            <input id="montantFrais" #montantFrais="ngModel" [(ngModel)]="frais.montant" name="montant" type="number" class="form-control" min="0" max="10"
+              required mdbActive>
+            <label for="montantFrais" mdbInputDirective>Montant &euro;</label>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer justify-content-center">
+        <button type="button" class="btn btn-secondary waves-light" data-dismiss="modal" (click)="fluid.hide()" mdbWavesEffect>Annuler</button>
+        <button form="form-ajouter-ligne-de-frais" type="submit" class="btn btn-primary waves-light" [disabled]="!(dateFrais.valid && natureFrais.valid && montantFrais.valid)"
+          mdbWavesEffect mdbActive>Enregistrer</button>
+      </div>
+    </div>
+  </div>
+</div>
