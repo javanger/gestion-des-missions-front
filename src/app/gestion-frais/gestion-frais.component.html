@@ -1,0 +1,39 @@
+<p>
+  gestion-frais works!
+</p>
+
+<ul>
+  <li></li>
+</ul>
+
+<h2>Gestion des frais</h2>
+<table class="table table-striped table-sm">
+  <thead>
+    <tr>
+      <th>Date de début</th>
+      <th>Date de fin</th>
+      <th>Nature</th>
+      <th>Départ</th>
+      <th>Arrivée</th>
+      <th>Transport</th>
+      <th>Frais</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let mission of missions" [ngClass]="{'table-warning': mission.estEchue}">
+      <td>{{ mission.dateDebut }}</td>
+      <td>{{ mission.dateFin }}</td>
+      <td>{{ mission.nature }}</td>
+      <td>{{ mission.villeDepart }}</td>
+      <td>{{ mission.villeArrivee }}</td>
+      <td>{{ mission.transport }}</td>
+      <td>{{ mission.montantFrais }}</td>
+      <td *ngIf="mission.estEchue">
+        <button (click)="afficherDetails(mission)">Ajouter</button> |
+        <a routerLink="">Exporter (PDF)</a>
+      </td>
+      <td *ngIf="!mission.estEchue"></td>
+    </tr>
+  </tbody>
+</table>

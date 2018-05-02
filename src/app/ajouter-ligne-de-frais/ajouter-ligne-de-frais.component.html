@@ -1,7 +1,4 @@
-<p>
-  ajouter-ligne-de-frais works!
-</p>
-<button type="button" class="btn btn-primary waves-light" data-toggle="modal" data-target="#basicExample" (click)="fluid.show()"
+<button type="button" class="btn btn-sm btn-primary waves-light" data-toggle="modal" data-target="#basicExample" (click)="fluid.show()"
   mdbWavesEffect>
   Ajouter un frais
 </button>
@@ -29,8 +26,8 @@
             <label for="natureFrais">Quelle nature ?</label>
           </div>
           <div class="md-form">
-            <input id="montantFrais" #montantFrais="ngModel" [(ngModel)]="frais.montant" name="montant" type="number" class="form-control" min="0" max="10"
-              required mdbActive>
+            <input id="montantFrais" #montantFrais="ngModel" [(ngModel)]="frais.montant" name="montant" type="number" class="form-control"
+              min="0" max="10" required mdbActive>
             <label for="montantFrais" mdbInputDirective>Montant &euro;</label>
           </div>
         </form>

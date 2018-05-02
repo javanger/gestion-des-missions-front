@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SaisieNoteDeFraisComponent } from './saisie-note-de-frais.component';
+import { GestionFraisComponent } from './gestion-frais.component';
 
-describe('SaisieNoteDeFraisComponent', () => {
-  let component: SaisieNoteDeFraisComponent;
-  let fixture: ComponentFixture<SaisieNoteDeFraisComponent>;
+describe('GestionFraisComponent', () => {
+  let component: GestionFraisComponent;
+  let fixture: ComponentFixture<GestionFraisComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SaisieNoteDeFraisComponent ]
+      declarations: [ GestionFraisComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SaisieNoteDeFraisComponent);
+    fixture = TestBed.createComponent(GestionFraisComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
