@@ -19,7 +19,7 @@
     <div class="col-lg-3 mb-3">
 
       <label for="estFacturee">Facturée</label>
-      <select class="form-control" id="estFacturee" (change)="choixEstFacturee($event)" mdbActive mdbInputDirective [(ngModel)]="newNature.estFacturee"
+      <select class="form-control" id="estFacturee" (change)="choixEstFacturee()" mdbActive mdbInputDirective [(ngModel)]="newNature.estFacturee"
         name="estFacturee" #versementPrime="ngModel">
         <option selected value="true">Oui</option>
         <option value="false">Non</option>
