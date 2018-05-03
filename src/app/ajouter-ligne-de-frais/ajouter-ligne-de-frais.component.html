@@ -1,19 +1,19 @@
-<button type="button" class="btn btn-sm btn-primary waves-light" data-toggle="modal" data-target="#basicExample" (click)="fluid.show()"
+<button type="button" class="btn btn-sm btn-primary waves-light" data-toggle="modal" data-target="#basicExample" (click)="modalAjoutFrais.show()"
   mdbWavesEffect>
   Ajouter un frais
 </button>
-<div mdbModal #fluid="mdb-modal" class="modal fade bottom" id="fullHeightModalRight" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+<div mdbModal #modalAjoutFrais="mdb-modal" class="modal fade bottom" id="fullHeightModalRight" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
   aria-hidden="true">
   <div class="modal-dialog modal-md modal-bottom" role="document">
     <div class="modal-content">
-      <div class="modal-header">
+      <div class="modal-header card-header primary-color white-text">
         <h4 class="modal-title w-100" id="myModalLabel">Ajout d'une ligne de frais</h4>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="fluid.hide()">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="modalAjoutFrais.hide()">
           <span aria-hidden="true">×</span>
         </button>
       </div>
       <div class="modal-body">
-        <form (ngSubmit)="submit(ajouterFraisForm.value)" #ajouterFraisForm="ngForm" name="form-ajouter-ligne-de-frais" id="form-ajouter-ligne-de-frais">
+        <form (ngSubmit)="submit(ajouterFraisForm.value, modalAjoutFrais)" #ajouterFraisForm="ngForm" name="form-ajouter-ligne-de-frais" id="form-ajouter-ligne-de-frais">
           <div class="md-form">
             <label for="dateFrais">Date</label>
             <input id="dateFrais" #dateFrais="ngModel" [(ngModel)]="frais.date" name="date" type="date" class="form-control" placeholder="jj/mm/aaaa"
@@ -33,8 +33,8 @@
         </form>
       </div>
       <div class="modal-footer justify-content-center">
-        <button type="button" class="btn btn-secondary waves-light" data-dismiss="modal" (click)="fluid.hide()" mdbWavesEffect>Annuler</button>
-        <button form="form-ajouter-ligne-de-frais" type="submit" class="btn btn-primary waves-light" [disabled]="!(dateFrais.valid && natureFrais.valid && montantFrais.valid)"
+        <button type="button" class="btn btn-sm btn-outline-primary waves-light" data-dismiss="modal" (click)="modalAjoutFrais.hide()" mdbWavesEffect>Annuler</button>
+        <button form="form-ajouter-ligne-de-frais" type="submit" class="btn btn-sm btn-outline-default waves-light" [disabled]="!(dateFrais.valid && natureFrais.valid && montantFrais.valid)"
           mdbWavesEffect mdbActive>Enregistrer</button>
       </div>
     </div>

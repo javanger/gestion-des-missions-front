@@ -1,4 +1,4 @@
-export class Nature {
+export class NatureMission {
 
     constructor(
         public libelle?: string,
@@ -12,8 +12,9 @@ export class Nature {
 
 export class LigneDeFrais {
     constructor(
-        public nature?: string,
+        public id?: string,
         public date?: string,
+        public nature?: string,
         public montant?: string
     ) { }
 }
@@ -30,5 +31,14 @@ export class MissionDetailsFrais {
         public transport?: string,
         public estimationPrime?: string,
         public montantFrais?: string
-    ) {}
+    ) {
+        this.montantFrais = "0";
+     }
+}
+
+export class NoteDeFrais {
+    constructor(
+        public id?: string,
+        public items?: LigneDeFrais[]
+    ) { }
 }

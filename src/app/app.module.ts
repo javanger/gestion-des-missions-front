@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { DemoNoteDeFraisComponent } from './demo-note-de-frais/demo-note-de-frais.component';
-import { LigneDeFraisComponent } from './ligne-de-frais/ligne-de-frais.component';
 import { NoteDeFraisComponent } from './note-de-frais/note-de-frais.component';
 import { AjouterLigneDeFraisComponent } from './ajouter-ligne-de-frais/ajouter-ligne-de-frais.component';
 import { FormsModule } from '@angular/forms';
@@ -26,7 +25,6 @@ const appRoutes: Routes = [
   declarations: [
     AppComponent,
     DemoNoteDeFraisComponent,
-    LigneDeFraisComponent,
     NoteDeFraisComponent,
     AjouterLigneDeFraisComponent,
     GestionFraisComponent
