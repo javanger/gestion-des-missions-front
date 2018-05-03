@@ -21,27 +21,40 @@ export class AjouterNatureComponent implements OnInit {
   }
 
   choixVersementPrime() {
-    console.log(this.versementPrime)
     this.versementPrime = !this.versementPrime;
   }
 
   afficherPourcentagePrime() {
-    return this.versementPrime;
+
+    if (this.estFacturee) {
+      return this.versementPrime;
+    } else {
+      return false;
+    }
+
   }
 
   choixEstFacturee() {
     this.estFacturee = !this.estFacturee;
+
   }
 
-  afficherTjm() { 
+  afficherFacturation() {
     return this.estFacturee;
   }
 
+  verifiePourcentagePrime(value: number) {
+    console.log("tests")
+
+    if (value > 9 || value < 0) {
+      return false
+    } else {
+      return true;
+    }
+  }
+
   submit() {
-    //console.log(this.newNature)
-
     this.serviceNature.sendNature(this.newNature)
-
   }
 
 }
