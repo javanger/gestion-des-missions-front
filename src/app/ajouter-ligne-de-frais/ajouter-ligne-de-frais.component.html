@@ -2,8 +2,8 @@
   mdbWavesEffect>
   Ajouter un frais
 </button>
-<div mdbModal #modalAjoutFrais="mdb-modal" class="modal fade bottom" id="fullHeightModalRight" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-  aria-hidden="true">
+<div mdbModal #modalAjoutFrais="mdb-modal" class="modal fade bottom" id="fullHeightModalRight" tabindex="-1" role="dialog"
+  aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-md modal-bottom" role="document">
     <div class="modal-content">
       <div class="modal-header card-header primary-color white-text">
@@ -13,27 +13,35 @@
         </button>
       </div>
       <div class="modal-body">
-        <form (ngSubmit)="submit(ajouterFraisForm.value, modalAjoutFrais)" #ajouterFraisForm="ngForm" name="form-ajouter-ligne-de-frais" id="form-ajouter-ligne-de-frais">
-          <div class="md-form">
+        <form (ngSubmit)="submit(ajouterFraisForm.value, modalAjoutFrais)" #ajouterFraisForm="ngForm" name="form-ajouter-ligne-de-frais"
+          id="form-ajouter-ligne-de-frais">
+          <div class="">
             <label for="dateFrais">Date</label>
             <input id="dateFrais" #dateFrais="ngModel" [(ngModel)]="frais.date" name="date" type="date" class="form-control" placeholder="jj/mm/aaaa"
               required mdbActive>
           </div>
-          <div class="md-form">
+          <div class="">
+            <label for="natureFrais">Quelle nature ?</label>
             <select id="natureFrais" #natureFrais="ngModel" class="custom-select" name="nature" [(ngModel)]="frais.nature" required mdbActive>
               <option *ngFor="let n of natures" [ngValue]="n">{{ n }}</option>
             </select>
-            <label for="natureFrais">Quelle nature ?</label>
           </div>
-          <div class="md-form">
+          <div class="">
+            <label for="montantFrais" mdbInputDirective>Montant</label>
             <input id="montantFrais" #montantFrais="ngModel" [(ngModel)]="frais.montant" name="montant" type="number" class="form-control"
               min="0" max="10" required mdbActive>
-            <label for="montantFrais" mdbInputDirective>Montant &euro;</label>
           </div>
         </form>
+        <br>
+        <div [hidden]="!message" class="card red lighten-2 text-center z-depth-2">
+          <div class="card-body">
+            <p class="white-text mb-0">{{ message }}</p>
+          </div>
+        </div>
       </div>
       <div class="modal-footer justify-content-center">
-        <button type="button" class="btn btn-sm btn-outline-primary waves-light" data-dismiss="modal" (click)="modalAjoutFrais.hide()" mdbWavesEffect>Annuler</button>
+        <button type="button" class="btn btn-sm btn-outline-primary waves-light" data-dismiss="modal" (click)="modalAjoutFrais.hide()"
+          mdbWavesEffect>Annuler</button>
         <button form="form-ajouter-ligne-de-frais" type="submit" class="btn btn-sm btn-outline-default waves-light" [disabled]="!(dateFrais.valid && natureFrais.valid && montantFrais.valid)"
           mdbWavesEffect mdbActive>Enregistrer</button>
       </div>

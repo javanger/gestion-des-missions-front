@@ -17,9 +17,8 @@ export class AjouterLigneDeFraisComponent implements OnInit {
   @Input() mission: MissionDetailsFrais;
   frais: LigneDeFrais;
   natures: string[];
-  badNatureMessage: string = "Veuillez sélectionner une nature !";
-  badMontantMessage: string = "Le montant doit être positif !";
-  badDateMessage: string = "La date doit être comprise dans la période de la mission !";
+  message: string;
+
 
   constructor(private _noteDeFraisService: NoteDeFraisService) {
     this.frais = new LigneDeFrais();
@@ -30,8 +29,11 @@ export class AjouterLigneDeFraisComponent implements OnInit {
   }
 
   submit(frais: LigneDeFrais, modal: any) {
+    // reinitialiser le message
+    this.message = "";
     // vérifier la valeur des champs
     if (this._verifierDate(frais.date) && this._verifierMontant(frais.montant) && this._verifierNature(frais.nature)) {
+
       // envoyer l'objet au serveur pour l'ajouter en base
       this._noteDeFraisService.ajouterFrais(frais, this.note.id);
       // fermer la modal
@@ -39,6 +41,7 @@ export class AjouterLigneDeFraisComponent implements OnInit {
       // afficher la modal success
       // TODO service notification
     }
+
   }
 
   /**
@@ -46,25 +49,31 @@ export class AjouterLigneDeFraisComponent implements OnInit {
    * @param valeur boolean
    */
   private _verifierMontant(valeur: string): boolean {
-    return parseInt(valeur) > 0;
+    const condition: boolean = parseInt(valeur) > 0;
+    if (!condition) this.message += "Le montant doit être positif !\n";
+    return condition;
   }
 
   /**
    * Retourne vrai si que la date est comprise dans la periode de la mission
    * @param valeur boolean
    */
-  private _verifierDate(valeur: string): boolean {
+  private _verifierDate(valeur: string): any {
     const date = new Date(valeur);
     const debut = new Date(this.mission.dateDebut);
     const fin = new Date(this.mission.dateFin);
-    return date >= debut && date <= fin;
+    const condition: boolean = date >= debut && date <= fin;
+    if (!condition) this.message += "La date doit être comprise dans la période de la mission !\n";
+    return condition;
   }
 
   /**
    * Retourne vrai si la nature est comprise dans la liste
    * @param valeur 
    */
-  private _verifierNature(valeur: string): boolean {
-    return this.natures.includes(valeur);
+  private _verifierNature(valeur: string): any {
+    const condition: boolean = this.natures.includes(valeur);
+    if (!condition) this.message += "Veuillez sélectionner une nature !\n";
+    return condition;
   }
 }

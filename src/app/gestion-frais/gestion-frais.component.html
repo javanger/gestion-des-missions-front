@@ -22,15 +22,18 @@
   </thead>
   <tbody>
     <tr *ngFor="let mission of missions" [ngClass]="{'table-warning': mission.estEchue}">
-      <td class="text-center">{{ mission.dateDebut | date:'dd/MM/yyyy' }}</td>
+      <td>{{ mission.dateDebut | date:'dd/MM/yyyy' }}</td>
       <td>{{ mission.dateFin | date:'dd/MM/yyyy' }}</td>
       <td>{{ mission.nature }}</td>
       <td>{{ mission.villeDepart }}</td>
       <td>{{ mission.villeArrivee }}</td>
       <td>{{ mission.transport }}</td>
+      <td>{{ mission.frais | currency:'EUR':'0.2' }}</td>
       <td *ngIf="mission.estEchue">
-          <span class="badge badge-primary" (click)="afficherDetails(mission)"> <i class="fa fa-edit" aria-hidden="true"></i> MODIFIER</span>&nbsp;
-          <span class="badge badge-success" (click)="exportPdf()"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> EXPORTER</span>
+        <span class="badge badge-primary" (click)="afficherDetails(mission)">
+          <i class="fa fa-edit" aria-hidden="true"></i> MODIFIER</span>&nbsp;
+        <span class="badge badge-success" (click)="exportPdf()">
+          <i class="fa fa-file-pdf-o" aria-hidden="true"></i> EXPORTER</span>
       </td>
       <td *ngIf="!mission.estEchue"></td>
     </tr>
