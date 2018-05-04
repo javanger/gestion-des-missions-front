@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { MissionDetailsFrais, LigneDeFrais, NoteDeFrais } from '../models';
-import { NoteDeFraisService } from '../services/note-de-frais.service';
+import { MissionDetailsFrais, LigneDeFrais, NoteDeFrais } from '../../models';
+import { NoteDeFraisService } from '../../services/note-de-frais.service';
 import { Subscription } from 'rxjs/Subscription';
 
 /**
@@ -22,6 +22,7 @@ export class NoteDeFraisComponent implements OnInit {
     this.ajoutFrais = this._fraisServ.ajoutFraisSubject.subscribe(
       (frais: LigneDeFrais) => {
         // ajouter le nouveau frais à la liste
+        console.log(JSON.stringify(frais));
         this.note.items.push(frais);
       }
     );

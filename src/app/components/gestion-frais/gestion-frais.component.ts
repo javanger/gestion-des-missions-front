@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { NoteDeFraisService } from '../services/note-de-frais.service';
-import { MissionDetailsFrais, LigneDeFrais } from '../models';
+import { NoteDeFraisService } from '../../services/note-de-frais.service';
+import { MissionDetailsFrais, LigneDeFrais } from '../../models';
 import { Router } from '@angular/router';
 import { map } from "rxjs/operators";
 import { Subscription } from 'rxjs/Subscription';

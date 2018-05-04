@@ -56,7 +56,7 @@
       </thead>
       <tbody>
         <tr *ngFor="let ligne of note.items">
-          <td>{{ ligne.date }}</td>
+          <td>{{ ligne.date | date:'dd/MM/yyyy' }}</td>
           <td>{{ ligne.nature }}</td>
           <td>{{ ligne.montant | currency:'EUR':'0.2' }}</td>
           <td>

@@ -1,9 +1,9 @@
-import { Injectable } from '@angular/core';
+import { AjouterLigneDeFraisComponent } from '../components/ajouter-ligne-de-frais/ajouter-ligne-de-frais.component';
 import { LigneDeFrais, MissionDetailsFrais, NoteDeFrais } from '../models';
 import { environment } from '../../environments/environment';
 import { HttpClient } from '@angular/common/http';
-import { AjouterLigneDeFraisComponent } from '../ajouter-ligne-de-frais/ajouter-ligne-de-frais.component';
 import { Observable } from 'rxjs/Observable';
+import { Injectable } from '@angular/core';
 import { Subject } from "rxjs/Subject";
 
 /**
@@ -72,7 +72,15 @@ export class NoteDeFraisService {
    * @return Observable<NoteDeFrais>
    */
   recupererFraisAvecNote(id: string): Observable<NoteDeFrais> {
-    const URL_API = environment.apiUrl + "api/notes/mission/" + id;
+    const URL_API = environment.apiUrl + "api/notes/missions/" + id;
     return this._http.get<NoteDeFrais>(URL_API);
+  }
+
+  /**
+   * Vérfier l'existance d'un frais
+   */
+  verifierExistanceFrais(idMission: string, date: string, nature: string): Observable<boolean> {
+    const URL_API = environment.apiUrl + "api/notes/missions/" + idMission + "/frais/check";
+    return this._http.post<boolean>(URL_API, new LigneDeFrais("", date, nature, ""));
   }
 }

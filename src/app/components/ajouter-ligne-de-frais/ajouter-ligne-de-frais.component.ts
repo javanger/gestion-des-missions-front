@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { LigneDeFrais, NoteDeFrais, MissionDetailsFrais } from '../models';
-import { NoteDeFraisService } from '../services/note-de-frais.service';
+import { LigneDeFrais, NoteDeFrais, MissionDetailsFrais } from '../../models';
+import { NoteDeFraisService } from '../../services/note-de-frais.service';
 import { resolve, reject } from 'q';
 
 /**
@@ -18,7 +18,7 @@ export class AjouterLigneDeFraisComponent implements OnInit {
   frais: LigneDeFrais;
   natures: string[];
   message: string;
-
+  private _estUnique: boolean = false;
 
   constructor(private _noteDeFraisService: NoteDeFraisService) {
     this.frais = new LigneDeFrais();
@@ -32,15 +32,15 @@ export class AjouterLigneDeFraisComponent implements OnInit {
     // reinitialiser le message
     this.message = "";
     // vérifier la valeur des champs
-    if (this._verifierDate(frais.date) && this._verifierMontant(frais.montant) && this._verifierNature(frais.nature)) {
 
-      // envoyer l'objet au serveur pour l'ajouter en base
-      this._noteDeFraisService.ajouterFrais(frais, this.note.id);
-      // fermer la modal
-      modal.hide();
-      // afficher la modal success
-      // TODO service notification
-    }
+    this._verifierExistance(() => {
+      if (this._verifierDate() && this._verifierMontant() && this._verifierNature() && this._estUnique) {
+        // envoyer l'objet au serveur pour l'ajouter en base
+        this._noteDeFraisService.ajouterFrais(frais, this.note.id);
+        // fermer la modal
+        modal.hide();
+      }
+    });
 
   }
 
@@ -48,8 +48,8 @@ export class AjouterLigneDeFraisComponent implements OnInit {
    * Retourne vrai si la valeur est positive
    * @param valeur boolean
    */
-  private _verifierMontant(valeur: string): boolean {
-    const condition: boolean = parseInt(valeur) > 0;
+  private _verifierMontant(): boolean {
+    const condition: boolean = parseInt(this.frais.montant) > 0;
     if (!condition) this.message += "Le montant doit être positif !\n";
     return condition;
   }
@@ -58,8 +58,8 @@ export class AjouterLigneDeFraisComponent implements OnInit {
    * Retourne vrai si que la date est comprise dans la periode de la mission
    * @param valeur boolean
    */
-  private _verifierDate(valeur: string): any {
-    const date = new Date(valeur);
+  private _verifierDate(): boolean {
+    const date = new Date(this.frais.date);
     const debut = new Date(this.mission.dateDebut);
     const fin = new Date(this.mission.dateFin);
     const condition: boolean = date >= debut && date <= fin;
@@ -71,9 +71,23 @@ export class AjouterLigneDeFraisComponent implements OnInit {
    * Retourne vrai si la nature est comprise dans la liste
    * @param valeur 
    */
-  private _verifierNature(valeur: string): any {
-    const condition: boolean = this.natures.includes(valeur);
+  private _verifierNature(): boolean {
+    const condition: boolean = this.natures.includes(this.frais.nature);
     if (!condition) this.message += "Veuillez sélectionner une nature !\n";
     return condition;
   }
+
+  /**
+   * Retourne 
+   */
+  private _verifierExistance(callback: any): void {
+    this._noteDeFraisService.verifierExistanceFrais(this.mission.id, this.frais.date, this.frais.nature).subscribe(
+      (c: boolean) => {
+        this._estUnique = c;
+        if (!c) this.message += "La note de frais existe déja pour cette date et cette nature. De préférence veuillez la modifier ! ";
+        callback();
+      }
+    );
+  }
+
 }

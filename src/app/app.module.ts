@@ -2,13 +2,13 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
-import { DemoNoteDeFraisComponent } from './demo-note-de-frais/demo-note-de-frais.component';
-import { NoteDeFraisComponent } from './note-de-frais/note-de-frais.component';
-import { AjouterLigneDeFraisComponent } from './ajouter-ligne-de-frais/ajouter-ligne-de-frais.component';
+import { DemoNoteDeFraisComponent } from './components/demo-note-de-frais/demo-note-de-frais.component';
+import { NoteDeFraisComponent } from './components/note-de-frais/note-de-frais.component';
+import { AjouterLigneDeFraisComponent } from './components/ajouter-ligne-de-frais/ajouter-ligne-de-frais.component';
 import { FormsModule } from '@angular/forms';
 import { NoteDeFraisService } from './services/note-de-frais.service';
 import { HttpClientModule } from '@angular/common/http';
-import { GestionFraisComponent } from './gestion-frais/gestion-frais.component';
+import { GestionFraisComponent } from './components/gestion-frais/gestion-frais.component';
 import { Routes, RouterModule } from '@angular/router';
 
 const appRoutes: Routes = [
