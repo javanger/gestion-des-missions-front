@@ -1,0 +1,39 @@
+<form #monForm="ngForm">
+  <div class="col-12 col-lg-4 col-md-6 offset-lg-4 offset-md-3 p-5">
+      <div class="card">
+        <div class="card-body">
+
+          <div class="form-header">
+              <h3 class="text-center"><i class="fa fa-lock"> Connexion :</i></h3>
+          </div>
+
+          <div class="md-form">
+            <i class="fa fa-drivers-license-o prefix grey-text"></i>
+            <input [(ngModel)]="monModel.matricule"  #matricule="ngModel" required name="matricule"
+              minlength="2" type="text" class="form-control" mdbActive/>
+            <label>Matricule</label>
+          </div>
+        
+          <div class="md-form">
+            <i class="fa fa-user prefix grey-text"></i>
+            <input [(ngModel)]="monModel.passWord" #passWord="ngModel" required name="passWord"
+              type="text" class="form-control" mdbActive/>
+            <label>Mots de Passe</label>
+          </div>
+
+          <ng-container *ngIf="message != null">
+            <div class="card red lighten-1 text-center z-depth-2">
+                <div class="card-body">
+                    <p class="white-text mb-0">{{message}}</p>
+                </div>
+            </div>
+          </ng-container>
+
+          <div class="text-center">
+            <button type="button" [disabled]="!(matricule.valid&&passWord.valid)" (click)="submit()"  class="btn btn-deep-orange waves-light" mdbWavesEffect>Connexion</button>
+          </div>
+          
+      </div>
+    </div>
+  </div>
+</form>
