@@ -14,6 +14,7 @@ import { Router } from '@angular/router';
 export class ConnexionComponent implements OnInit {
   
   monModel:MonModel = new MonModel();
+  message:string;
 
   constructor(private cService:ConnexionService, private router: Router) { }
 
@@ -26,9 +27,9 @@ export class ConnexionComponent implements OnInit {
     .subscribe(utilisateur => {
       this.router.navigate(['/accueil'])
     },
-  error => {
-    // TODO !!!!
-  })
+    error => {
+      this.message = "Matricule où mots de passe incorrect";
+    })
     ;
   }
 

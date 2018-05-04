@@ -20,7 +20,15 @@
               type="text" class="form-control" mdbActive/>
             <label>Mots de Passe</label>
           </div>
-        
+
+          <ng-container *ngIf="message != null">
+            <div class="card red lighten-1 text-center z-depth-2">
+                <div class="card-body">
+                    <p class="white-text mb-0">{{message}}</p>
+                </div>
+            </div>
+          </ng-container>
+
           <div class="text-center">
             <button type="button" [disabled]="!(matricule.valid&&passWord.valid)" (click)="submit()"  class="btn btn-deep-orange waves-light" mdbWavesEffect>Connexion</button>
           </div>

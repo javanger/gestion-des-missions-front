@@ -15,6 +15,7 @@ const URL_BACKEND = environment.apiUrl;
 export class ConnexionService {
 
   connexionSub = new Subject<Utilisateur>();
+  deconnexionSub = new Subject<string>();
 
   constructor(private _http:HttpClient) { }
 
@@ -43,7 +44,7 @@ export class ConnexionService {
     return this.connexionSub.asObservable();
   }
 
-  deconnexion(){
+  deconnexion():Observable<string>{
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/x-www-form-urlencoded'
@@ -55,7 +56,12 @@ export class ConnexionService {
       URL_BACKEND + "logout",
       // options de la requête HTTP
       httpOptions)
+      .map((data)=> JSON.stringify(data))
       .do((data) => localStorage.removeItem("collaborateur"))
-      .do(() => this.connexionSub.next())
+      .do((data) => this.deconnexionSub.next(data))
+  }
+
+  ceDeconnecte():Observable<string> { 
+    return this.deconnexionSub.asObservable();
   }
 }

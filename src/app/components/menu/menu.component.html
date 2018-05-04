@@ -28,7 +28,10 @@
         </ul>
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
-            <a class="nav-link">Bonjour {{utilisateurConnecter.nom}} {{utilisateurConnecter.prenom}}</a><a class="nav-link" (click)="deconnexion()" >Déconnexion</a>
+           <span class="nav-link">Bonjour {{utilisateurConnecter.nom}} {{utilisateurConnecter.prenom}},</span>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" (click)="deconnexion()" >Déconnexion</a>
           </li>
         </ul>
       </ng-container>
@@ -41,3 +44,10 @@
       </ng-template>
   </links>   
 </mdb-navbar>
+<ng-container *ngIf="message != null">
+    <div class="card red lighten-1 text-center z-depth-2">
+        <div class="card-body">
+            <p class="white-text mb-0">{{message}}</p>
+        </div>
+    </div>
+  </ng-container>

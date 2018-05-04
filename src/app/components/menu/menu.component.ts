@@ -12,8 +12,24 @@ export class MenuComponent implements OnInit {
   estManager:boolean = false;
   estConnecter:boolean = false;
   utilisateurConnecter:Utilisateur;
+  message:string;
 
-  constructor(private cService:ConnexionService) { }
+  constructor(private cService:ConnexionService) { 
+    let utilisateurBackup = localStorage.getItem("collaborateur");
+    if (utilisateurBackup === null){
+      this.estConnecter = false;
+      this.estAdministrateur = false;
+      this.estManager = false;
+    }else{
+      this.utilisateurConnecter = JSON.parse(utilisateurBackup)
+      this.estConnecter = true;
+      if(this.utilisateurConnecter.role === Role.ROLE_ADMINISTRATEUR){
+        this.estAdministrateur = true;
+      }else if(this.utilisateurConnecter.role === Role.ROLE_MANAGER){
+        this.estManager = true;
+      }
+    }
+  }
 
   ngOnInit() {
     this.connecter();
@@ -32,10 +48,14 @@ export class MenuComponent implements OnInit {
   }
 
   deconnexion(){
-    this.cService.deconnexion().subscribe(()=>{
-      this.estConnecter = false;
-      this.estAdministrateur = false;
-      this.estManager = false;
+    this.cService.deconnexion().subscribe(message => {
+      if(message.localeCompare("success")){
+        this.estConnecter = false;
+        this.estAdministrateur = false;
+        this.estManager = false;
+      }else{
+        this.message = "Une erreur est survenue lors de la déconnexion";
+      }
     })
   }
 }
