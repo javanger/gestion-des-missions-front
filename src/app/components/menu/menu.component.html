@@ -1,0 +1,43 @@
+<mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark scrolling-navbar bg-primary p-2">
+  <logo><a class="navbar-brand" routerLink="/accueil">Accueil</a></logo>
+  <links>
+      <ng-container *ngIf="estConnecter; else elseBlock">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" routerLink="/gestionMission" routerLinkActive="active-link">Gestion des missions<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" routerLink="/planningMission" routerLinkActive="active-link">Planing des missions<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" routerLink="/primes" routerLinkActive="active-link">Primes<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" routerLink="/saisieNoteFrais" routerLinkActive="active-link">Saisie note de frais<span class="sr-only">(current)</span></a>
+            </li>
+            <ng-container *ngIf="estManager">
+              <li class="nav-item">
+                <a class="nav-link" routerLink="/validationMission" routerLinkActive="active-link">Validation des missions<span class="sr-only">(current)</span></a>
+              </li>
+            </ng-container>
+            <ng-container *ngIf="estAdministrateur">
+              <li class="nav-item">
+                <a class="nav-link" routerLink="/natureMission" routerLinkActive="active-link">Natures de mission<span class="sr-only">(current)</span></a>
+              </li>
+            </ng-container>
+        </ul>
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link">Bonjour {{utilisateurConnecter.nom}} {{utilisateurConnecter.prenom}}</a><a class="nav-link" (click)="deconnexion()" >Déconnexion</a>
+          </li>
+        </ul>
+      </ng-container>
+      <ng-template #elseBlock>
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <button type="button" class="btn btn-default btn-sm waves-light" routerLink="/connexion" mdbWavesEffect>Connexion</button>
+          </li>
+        </ul>
+      </ng-template>
+  </links>   
+</mdb-navbar>

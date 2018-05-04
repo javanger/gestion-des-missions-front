@@ -1,3 +1,10 @@
-<p>
-  Api url : {{apiUrl}}
-</p>
+<header class="container p-5">
+  <app-bandeau></app-bandeau>
+</header>
+<nav class="container-fluid sticky-top">
+  <app-menu></app-menu>
+</nav>
+<article class="container" id="content">
+  <router-outlet></router-outlet>
+</article>
+<footer class="container"></footer>
