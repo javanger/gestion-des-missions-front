@@ -3,7 +3,7 @@ import { LigneDeFrais, MissionDetailsFrais, NoteDeFrais } from '../models';
 import { environment } from '../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { AjouterLigneDeFraisComponent } from '../ajouter-ligne-de-frais/ajouter-ligne-de-frais.component';
-import { Observable } from 'rxjs/observable';
+import { Observable } from 'rxjs/Observable';
 import { Subject } from "rxjs/Subject";
 
 /**
