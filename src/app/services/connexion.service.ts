@@ -9,7 +9,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/do';
 import { Subject } from 'rxjs/Subject';
 
-const URL_BACKEND = environment.backendUrl;
+const URL_BACKEND = environment.apiUrl;
 
 @Injectable()
 export class ConnexionService {
