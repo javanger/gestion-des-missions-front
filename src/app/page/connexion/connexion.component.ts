@@ -29,8 +29,7 @@ export class ConnexionComponent implements OnInit {
     },
     error => {
       this.message = "Matricule où mots de passe incorrect";
-    })
-    ;
+    });
   }
 
 }
