@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Utilisateur, Role } from '../../model';
 import { ConnexionService } from '../../services/connexion.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-menu',
@@ -14,7 +15,7 @@ export class MenuComponent implements OnInit {
   utilisateurConnecter:Utilisateur;
   message:string;
 
-  constructor(private cService:ConnexionService) { 
+  constructor(private cService:ConnexionService, private router: Router) { 
     let utilisateurBackup = localStorage.getItem("collaborateur");
     if (utilisateurBackup === null){
       this.estConnecter = false;
@@ -53,6 +54,7 @@ export class MenuComponent implements OnInit {
         this.estConnecter = false;
         this.estAdministrateur = false;
         this.estManager = false;
+        this.router.navigate(['/accueil'])
       }else{
         this.message = "Une erreur est survenue lors de la déconnexion";
       }

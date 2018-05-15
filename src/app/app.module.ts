@@ -25,7 +25,7 @@ const appRoutes: Routes = [
   { path: 'accueil', component: AccueilComponent }, // /page1 affiche le composant A
   { path: 'connexion', component: ConnexionComponent },
   { path: 'demo', component: DemoNoteDeFraisComponent },
-  { path: 'gestion-frais', component: GestionFraisComponent },
+  { path: 'saisieNoteFrais', component: GestionFraisComponent },
   { path: 'gestion-frais/details', component: NoteDeFraisComponent },
   { path: 'gestion-frais/details/nouveau-frais', component: AjouterLigneDeFraisComponent },
   { path: '',   redirectTo: '/accueil', pathMatch: 'full' } // redirige vers la route page1 par défaut

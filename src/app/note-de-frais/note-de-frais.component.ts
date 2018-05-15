@@ -10,7 +10,7 @@ import { Subscription } from 'rxjs/Subscription';
 @Component({
   selector: 'app-note-de-frais',
   templateUrl: './note-de-frais.component.html',
-  styleUrls: ['./note-de-frais.component.css']
+  styleUrls: ['./note-de-frais.component.scss']
 })
 export class NoteDeFraisComponent implements OnInit {
 

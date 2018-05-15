@@ -4,6 +4,7 @@ import { MissionDetailsFrais, LigneDeFrais } from '../models';
 import { Router } from '@angular/router';
 import { map } from "rxjs/operators";
 import { Subscription } from 'rxjs/Subscription';
+import { Utilisateur } from '../model';
 
 /**
  * Affiche la liste des missions du collaborateur authentifié
@@ -15,13 +16,25 @@ import { Subscription } from 'rxjs/Subscription';
 })
 export class GestionFraisComponent implements OnInit {
 
-  public missions: MissionDetailsFrais[];
+  missions: MissionDetailsFrais[];
+  utilisateurConnecter:Utilisateur;
+  message:string;
 
   constructor(private _fraisServ: NoteDeFraisService, private router: Router) {}
 
   ngOnInit() {
-    // Lister les missions du collaborateur
-    this._fraisServ.listerMissionDetailsFrais("123456").subscribe(missions => this.missions = missions);
+    let utilisateurBackup = localStorage.getItem("collaborateur");
+    if (utilisateurBackup === null){
+      this.router.navigate(['/accueil'])
+    }else{
+      this.utilisateurConnecter = JSON.parse(utilisateurBackup)
+      // Lister les missions du collaborateur
+      this._fraisServ.listerMissionDetailsFrais(this.utilisateurConnecter.matricule).subscribe(missions => {
+        this.missions = missions},
+        error => {
+          this.message = "L'utilisateur n'a pas de note de frais";
+        });
+    }
   }
 
   /**
