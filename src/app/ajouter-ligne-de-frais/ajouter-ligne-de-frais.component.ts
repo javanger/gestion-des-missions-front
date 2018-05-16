@@ -33,11 +33,17 @@ export class AjouterLigneDeFraisComponent implements OnInit {
     this.message = "";
     // vérifier la valeur des champs
     if (this._verifierDate(frais.date) && this._verifierMontant(frais.montant) && this._verifierNature(frais.nature)) {
-
       // envoyer l'objet au serveur pour l'ajouter en base
-      this._noteDeFraisService.ajouterFrais(frais, this.note.id);
-      // fermer la modal
-      modal.hide();
+      this._noteDeFraisService.ajouterFrais(frais, this.note.id)
+        .subscribe(
+          succes => {
+            // fermer la modal
+            modal.hide(); 
+          }, fail => {
+            this.message = fail.error.message;
+          }
+        );
+ 
       // afficher la modal success
       // TODO service notification
     }
