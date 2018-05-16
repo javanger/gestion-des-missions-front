@@ -26,8 +26,6 @@ import { AuthInterceptor } from './services/auth-interceptor.service';
 import { ListerNatureComponent } from './lister-nature/lister-nature.component';
 import { PourcentagePrimePipe } from './pipes/pourcentage-prime.pipe';
 
-
-
 const appRoutes: Routes = [
   { path: 'accueil', component: AccueilComponent }, // /page1 affiche le composant A
   { path: 'connexion', component: ConnexionComponent },
@@ -56,6 +54,7 @@ const appRoutes: Routes = [
     GestionFraisComponent,
     ListerNatureComponent,
     PourcentagePrimePipe
+    GestionFraisComponent
   ],
   imports: [
     BrowserModule,
