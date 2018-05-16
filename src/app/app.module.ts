@@ -53,7 +53,7 @@ const appRoutes: Routes = [
     AjouterLigneDeFraisComponent,
     GestionFraisComponent,
     ListerNatureComponent,
-    PourcentagePrimePipe
+    PourcentagePrimePipe,
     GestionFraisComponent
   ],
   imports: [
