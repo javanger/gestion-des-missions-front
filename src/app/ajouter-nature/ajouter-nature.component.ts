@@ -44,7 +44,6 @@ export class AjouterNatureComponent implements OnInit {
   }
 
   verifiePourcentagePrime(value: number) {
-    console.log("tests")
 
     if (value > 9 || value < 0) {
       return false
@@ -54,7 +53,7 @@ export class AjouterNatureComponent implements OnInit {
   }
 
   submit() {
-    this.serviceNature.sendNature(this.newNature)
+    this.serviceNature.sendNature(this.newNature);
   }
 
 }

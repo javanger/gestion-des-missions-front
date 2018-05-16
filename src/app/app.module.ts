@@ -23,6 +23,8 @@ import { AccueilComponent } from './page/accueil/accueil.component';
 import { ConnexionComponent } from './page/connexion/connexion.component';
 import { ConnexionService } from './services/connexion.service';
 import { AuthInterceptor } from './services/auth-interceptor.service';
+import { ListerNatureComponent } from './lister-nature/lister-nature.component';
+import { PourcentagePrimePipe } from './pipes/pourcentage-prime.pipe';
 
 
 
@@ -31,6 +33,7 @@ const appRoutes: Routes = [
   { path: 'connexion', component: ConnexionComponent },
   { path: 'demo', component: DemoNoteDeFraisComponent },
   { path: 'saisieNoteFrais', component: GestionFraisComponent },
+  { path: 'natureMission', component: ListerNatureComponent },
   { path: 'gestion-frais/details', component: NoteDeFraisComponent },
   { path: 'gestion-frais/details/nouveau-frais', component: AjouterLigneDeFraisComponent },
   { path: '',   redirectTo: '/accueil', pathMatch: 'full' } // redirige vers la route page1 par défaut
@@ -50,7 +53,9 @@ const appRoutes: Routes = [
     DemoNoteDeFraisComponent,
     NoteDeFraisComponent,
     AjouterLigneDeFraisComponent,
-    GestionFraisComponent
+    GestionFraisComponent,
+    ListerNatureComponent,
+    PourcentagePrimePipe
   ],
   imports: [
     BrowserModule,

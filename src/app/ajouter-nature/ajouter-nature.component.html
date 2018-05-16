@@ -16,7 +16,7 @@
       </div>
       <div class="modal-body">
 
-        <form (ngSubmit)="submit()">
+        <form (ngSubmit)="submit()" name="form-ajouter-nature" id="form-ajouter-nature">
 
           <div class="row justify-content-md-center">
             <div class="col-lg-10 mb-3">
@@ -24,10 +24,6 @@
               <label for="libelle">Libellé</label>
               <input type="text" id="libelle" class="form-control" mdbActive mdbInputDirective [(ngModel)]="newNature.libelle" name="libelle"
                 #libelle="ngModel" minlength="3" required>
-
-              <div [hidden]="!libelle.valid" class="alert alert-danger">
-                <div [hidden]="libelle.hasError('minlength')">Le libellé doit être supérieur à 3 caractères</div>
-              </div>
 
             </div>
           </div>
@@ -109,9 +105,9 @@
       </div>
       <div class="modal-footer">
 
-        <button type="submit" class="btn btn-unique waves-light" mdbWavesEffect (click)="exampleModal.hide()">Annuler
+        <button class="btn btn-unique waves-light" mdbWavesEffect (click)="exampleModal.hide()">Annuler
         </button>
-        <button type="submit" class="btn btn-unique waves-light" [disabled]="!(libelle.valid)" mdbWavesEffect>Ajouter
+        <button type="submit" form="form-ajouter-nature" class="btn btn-unique waves-light" mdbWavesEffect>Ajouter
         </button>
 
       </div>
