@@ -8,12 +8,16 @@ import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { AjouterNatureComponent } from './ajouter-nature/ajouter-nature.component';
 import { DemoNatureComponent } from './demo-nature/demo-nature.component';
 import { NatureService } from './services/nature.service';
+import { DateFormatPipe } from './pipes/date-format.pipe';
+import { BooleanFormatPipe } from './pipes/boolean-format.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     AjouterNatureComponent,
-    DemoNatureComponent
+    DemoNatureComponent,
+    DateFormatPipe,
+    BooleanFormatPipe
   ],
   imports: [
     BrowserModule,
