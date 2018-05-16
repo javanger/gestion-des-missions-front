@@ -18,6 +18,8 @@ import { AccueilComponent } from './page/accueil/accueil.component';
 import { ConnexionComponent } from './page/connexion/connexion.component';
 import { ConnexionService } from './services/connexion.service';
 import { AuthInterceptor } from './services/auth-interceptor.service';
+import { PopupConfirmationComponent } from './popup-confirmation/popup-confirmation.component';
+import { ModifierLigneFraisComponent } from './modifier-ligne-frais/modifier-ligne-frais.component';
 
 
 
@@ -28,7 +30,7 @@ const appRoutes: Routes = [
   { path: 'saisieNoteFrais', component: GestionFraisComponent },
   { path: 'gestion-frais/details', component: NoteDeFraisComponent },
   { path: 'gestion-frais/details/nouveau-frais', component: AjouterLigneDeFraisComponent },
-  { path: '',   redirectTo: '/accueil', pathMatch: 'full' } // redirige vers la route page1 par défaut
+  { path: '', redirectTo: '/accueil', pathMatch: 'full' } // redirige vers la route page1 par défaut
 ]
 
 @NgModule({
@@ -41,7 +43,9 @@ const appRoutes: Routes = [
     DemoNoteDeFraisComponent,
     NoteDeFraisComponent,
     AjouterLigneDeFraisComponent,
-    GestionFraisComponent
+    GestionFraisComponent,
+    PopupConfirmationComponent,
+    ModifierLigneFraisComponent
   ],
   imports: [
     BrowserModule,
@@ -51,7 +55,7 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes)
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass:AuthInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
     ConnexionService,
     NoteDeFraisService
   ],

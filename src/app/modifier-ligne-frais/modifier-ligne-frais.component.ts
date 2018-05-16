@@ -1,60 +1,66 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { LigneDeFrais, NoteDeFrais, MissionDetailsFrais } from '../models';
 import { NoteDeFraisService } from '../services/note-de-frais.service';
-import { resolve, reject } from 'q';
-import { Subject } from 'rxjs/Subject';
 
-/**
- * Formulaire d'ajout d'une ligne de frais
- */
 @Component({
-  selector: 'app-ajouter-ligne-de-frais',
-  templateUrl: './ajouter-ligne-de-frais.component.html',
-  styleUrls: ['./ajouter-ligne-de-frais.component.css']
+  selector: 'app-modifier-ligne-frais',
+  templateUrl: './modifier-ligne-frais.component.html',
+  styleUrls: ['./modifier-ligne-frais.component.scss']
 })
-export class AjouterLigneDeFraisComponent implements OnInit {
+export class ModifierLigneFraisComponent implements OnInit {
 
   @Input() note: NoteDeFrais;
   @Input() mission: MissionDetailsFrais;
-  frais: LigneDeFrais;
+  message: string = "";
   natures: string[];
-  message: string;
-
+  @Input() idFrais: string;
+  frais: LigneDeFrais;
 
   constructor(private _noteDeFraisService: NoteDeFraisService) {
-    this.frais = new LigneDeFrais();
+    
   }
-
+  
   ngOnInit() {
+    
+    console.log("id frais: " + this.idFrais);
+    
     this._noteDeFraisService.listerNatures().subscribe(list => this.natures = list);
+    // this.frais.date = this.ancienfrais.date;
+    // this.frais.id = this.ancienfrais.id;
+    // this.frais.montant = this.ancienfrais.montant;
+    // this.frais.nature = this.ancienfrais.nature;
   }
 
-  submit(frais: LigneDeFrais, modal: any) {
+  modifier(ligne: LigneDeFrais) {
+
     // reinitialiser le message
     this.message = "";
     // vérifier la valeur des champs
-    if (this._verifierDate(frais.date) && this._verifierMontant(frais.montant) && this._verifierNature(frais.nature)) {
+    if (this._verifierDate(ligne.date) && this._verifierMontant(ligne.montant) && this._verifierNature(ligne.nature)) {
+
+      //console.log(ligne.id);
       // envoyer l'objet au serveur pour l'ajouter en base
-      this._noteDeFraisService.ajouterFrais(frais, this.note.id)
-        .subscribe(
-          frais => {
-            location.reload();                                                                                                                                                                                                                                                                                                                                                                                                                                                           
-            modal.hide(); 
-          }, fail => {
-            this.message = fail.error.message;
-          }
-        );
- 
+      /* this._noteDeFraisService.ajouterFrais(this.frais, this.note.id)
+         .subscribe(
+           frais => {
+             location.reload();                                                                                                                                                                                                                                                                                                                                                                                                                                                           
+           }, fail => {
+             this.message = fail.error.message;
+           }
+         );*/
+      console.log("modification :)");
+
       // afficher la modal success
       // TODO service notification
-    }
 
+    }
   }
 
+
   /**
-   * Retourne vrai si la valeur est positive
-   * @param valeur boolean
-   */
+ * Retourne vrai si la valeur est positive
+ * @param valeur boolean
+ */
   private _verifierMontant(valeur: string): boolean {
     const condition: boolean = parseInt(valeur) > 0;
     if (!condition) this.message += "Le montant doit être positif !\n";

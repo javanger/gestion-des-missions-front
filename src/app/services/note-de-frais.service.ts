@@ -41,11 +41,9 @@ export class NoteDeFraisService {
    * @param idNote 
    * @returns Observable<LigneDeFrais> 
    */
-  ajouterFrais(frais: LigneDeFrais, idNote: string): Observable<LigneDeFrais> {
+  ajouterFrais(frais: LigneDeFrais, idNote: string): Observable<LigneDeFrais | any> {
     const URL_API = environment.apiUrl + "api/notes/" + idNote + "/frais";
-    let response = this._http.post<LigneDeFrais>(URL_API, frais);
-    response.subscribe(frais => this._ajoutFrais.next(frais));
-    return response;
+    return this._http.post<LigneDeFrais>(URL_API, frais);
   }
 
   /**
@@ -76,5 +74,15 @@ export class NoteDeFraisService {
   recupererFraisAvecNote(id: string): Observable<NoteDeFrais> {
     const URL_API = environment.apiUrl + "api/notes/missions/" + id;
     return this._http.get<NoteDeFrais>(URL_API);
+  }
+
+  /**
+   * 
+   * @param id 
+   * @return Observable<string>
+   */
+  supprimerLigneFrais(id: string): Observable<String> {
+    const URL_API = environment.apiUrl + "api/notes/frais/" + id;
+    return this._http.delete<string>(URL_API);
   }
 }

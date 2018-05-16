@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MissionDetailsFrais, LigneDeFrais, NoteDeFrais } from '../models';
 import { NoteDeFraisService } from '../services/note-de-frais.service';
 import { Subscription } from 'rxjs/Subscription';
+import { Observable } from 'rxjs/Observable';
 
 /**
  * Vue détaillée de la mission et des frais associés
@@ -17,6 +18,7 @@ export class NoteDeFraisComponent implements OnInit {
   public mission: MissionDetailsFrais = new MissionDetailsFrais();
   public note: NoteDeFrais = new NoteDeFrais();
   private ajoutFrais: Subscription;
+  //@Output() clickDelete:EventEmitter<number> = new EventEmitter<number>();
 
   constructor(private _fraisServ: NoteDeFraisService, private _router: ActivatedRoute) {
     this.ajoutFrais = this._fraisServ.ajoutFraisSubject.subscribe(
@@ -33,6 +35,13 @@ export class NoteDeFraisComponent implements OnInit {
     // initialiser la liste des lignes de frais
     this._fraisServ.recupererMissionAvecId(idMission).subscribe(mission => this.mission = mission);
     this._fraisServ.recupererFraisAvecNote(idMission).subscribe(note => this.note = note);
+  }
+
+  delete(id: string): void {
+    this._fraisServ.supprimerLigneFrais(id).subscribe(
+      success => location.reload(),
+      fail => location.reload()
+    );
   }
 
 }
