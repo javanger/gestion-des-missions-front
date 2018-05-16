@@ -18,7 +18,7 @@
           <div class="">
             <label for="dateFrais">Date</label>
             <input id="dateFrais" #dateFrais="ngModel" [(ngModel)]="frais.date" name="date" type="date" class="form-control" placeholder="jj/mm/aaaa"
-              required mdbActive>
+              required mdbActive min="{{ mission.dateDebut }}" max="{{ mission.dateFin }}">
           </div>
           <div class="">
             <label for="natureFrais">Quelle nature ?</label>

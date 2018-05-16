@@ -47,6 +47,17 @@ export class NoteDeFraisService {
   }
 
   /**
+ * Modifier le frais
+ * @param frais 
+ * @returns Observable<LigneDeFrais> 
+ */
+  modifierFrais(frais: LigneDeFrais): Observable<LigneDeFrais | any> {
+    const URL_API = environment.apiUrl + "api/notes/frais";
+    return this._http.put<LigneDeFrais>(URL_API, frais);
+  }
+
+
+  /**
    * Récupérer les missions du collaborateur authentifié
    * @param matricule string
    * @returns Observable<MissionDetailsFrais[]>
@@ -76,8 +87,22 @@ export class NoteDeFraisService {
     return this._http.get<NoteDeFrais>(URL_API);
   }
 
+
   /**
-   * 
+   * Récupérer une ligne de frais par son id
+   * @param id 
+   * @return Observable<string>
+   */
+  recupererLigneFrais(id: string): Observable<LigneDeFrais> {
+    const URL_API = environment.apiUrl + "api/notes/frais/" + id;
+    return this._http.get<LigneDeFrais>(URL_API);
+  }
+
+
+
+
+  /**
+   * Supprimer une ligne de frais via son id
    * @param id 
    * @return Observable<string>
    */

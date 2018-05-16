@@ -12,6 +12,7 @@
       </div>
       <div class="modal-body">
         <form (ngSubmit)="modifier(modifierFraisForm.value)" #modifierFraisForm="ngForm" name="form-modifier-ligne-de-frais" id="form-modifier-ligne-de-frais">
+          <input type="hidden" name="id" [(ngModel)]="frais.id">
           <div class="">
             <label for="dateFrais">Date</label>
             <input id="dateFrais" #dateFrais="ngModel" [(ngModel)]="frais.date" name="date" type="date" class="form-control" placeholder="jj/mm/aaaa"

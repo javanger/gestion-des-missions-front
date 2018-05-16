@@ -11,24 +11,21 @@ export class ModifierLigneFraisComponent implements OnInit {
 
   @Input() note: NoteDeFrais;
   @Input() mission: MissionDetailsFrais;
+  @Input() idFrais: string;
   message: string = "";
   natures: string[];
-  @Input() idFrais: string;
   frais: LigneDeFrais;
 
   constructor(private _noteDeFraisService: NoteDeFraisService) {
-
   }
 
   ngOnInit() {
-    this.frais = new LigneDeFrais();
-    console.log("id frais: " + this.idFrais);
+    this.init();
+  }
 
+  init() {
+    this._noteDeFraisService.recupererLigneFrais(this.idFrais).subscribe(frais => this.frais = frais);
     this._noteDeFraisService.listerNatures().subscribe(list => this.natures = list);
-    // this.frais.date = this.ancienfrais.date;
-    // this.frais.id = this.ancienfrais.id;
-    // this.frais.montant = this.ancienfrais.montant;
-    // this.frais.nature = this.ancienfrais.nature;
   }
 
   modifier(ligne: LigneDeFrais) {
@@ -36,23 +33,21 @@ export class ModifierLigneFraisComponent implements OnInit {
     // reinitialiser le message
     this.message = "";
     // vérifier la valeur des champs
+    console.log(JSON.stringify(this.frais));
+    console.log(JSON.stringify(ligne));
     if (this._verifierDate(ligne.date) && this._verifierMontant(ligne.montant) && this._verifierNature(ligne.nature)) {
-
-      //console.log(ligne.id);
       // envoyer l'objet au serveur pour l'ajouter en base
-      /* this._noteDeFraisService.ajouterFrais(this.frais, this.note.id)
+      /* this._noteDeFraisService.modifierFrais(this.frais)
          .subscribe(
            frais => {
-             location.reload();                                                                                                                                                                                                                                                                                                                                                                                                                                                           
+             location.reload();
            }, fail => {
              this.message = fail.error.message;
            }
          );*/
+
+
       console.log("modification :)");
-
-      // afficher la modal success
-      // TODO service notification
-
     }
   }
 
@@ -72,10 +67,12 @@ export class ModifierLigneFraisComponent implements OnInit {
    * @param valeur boolean
    */
   private _verifierDate(valeur: string): any {
+    console.log(valeur);
     const date = new Date(valeur);
     const debut = new Date(this.mission.dateDebut);
     const fin = new Date(this.mission.dateFin);
     const condition: boolean = date >= debut && date <= fin;
+    console.log(debut + " " + date + " " + fin);
     if (!condition) this.message += "La date doit être comprise dans la période de la mission !\n";
     return condition;
   }

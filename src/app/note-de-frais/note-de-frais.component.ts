@@ -18,6 +18,7 @@ export class NoteDeFraisComponent implements OnInit {
   public mission: MissionDetailsFrais = new MissionDetailsFrais();
   public note: NoteDeFrais = new NoteDeFrais();
   private ajoutFrais: Subscription;
+  currentId: string;
   //@Output() clickDelete:EventEmitter<number> = new EventEmitter<number>();
 
   constructor(private _fraisServ: NoteDeFraisService, private _router: ActivatedRoute) {
@@ -34,7 +35,10 @@ export class NoteDeFraisComponent implements OnInit {
     let idMission: string = this._router.snapshot.paramMap.get("id");
     // initialiser la liste des lignes de frais
     this._fraisServ.recupererMissionAvecId(idMission).subscribe(mission => this.mission = mission);
-    this._fraisServ.recupererFraisAvecNote(idMission).subscribe(note => this.note = note);
+    this._fraisServ.recupererFraisAvecNote(idMission).subscribe(note => {
+      this.note = note;
+      this.currentId = note.items[0].id;
+    });
   }
 
   delete(id: string): void {
