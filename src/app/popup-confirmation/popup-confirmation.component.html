@@ -1,7 +1,8 @@
-<span class="badge badge-primary" (click)="confirm.show()"> {{ actionName }}</span>
+<span class="badge badge-warning" style="cursor: pointer;" (click)="confirm.show()"> {{ actionLabel }}</span>
 
 
-<div mdbModal #confirm="mdb-modal" class="modal fade" id="centralModalSuccess" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div mdbModal #confirm="mdb-modal" class="modal fade" id="centralModalSuccess" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+    aria-hidden="true">
     <div class="modal-dialog modal-notify modal-danger" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -17,10 +18,9 @@
                 </div>
             </div>
             <div class="modal-footer justify-content-center">
-                <a type="button" class="btn btn-primary waves-light" mdbWavesEffect>Oui</a>
+                <a type="button" class="btn btn-primary waves-light" (click)="confirm.hide();make();" mdbWavesEffect>Oui</a>
                 <a type="button" class="btn btn-outline-secondary" data-dismiss="modal" (click)="confirm.hide()" mdbWavesEffect>Non</a>
             </div>
         </div>
     </div>
 </div>
-                

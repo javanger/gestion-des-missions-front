@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 import { Subscription } from 'rxjs/Subscription';
@@ -11,15 +11,15 @@ import { Subscription } from 'rxjs/Subscription';
 export class PopupConfirmationComponent implements OnInit {
 
   @Input() message: string;
-  @Input() actionName: string;
-  @Input() action: string;
+  @Input() actionLabel: string;
+  @Output() confirm: EventEmitter<any> = new EventEmitter<any>();
 
-  constructor() {
+  constructor() { }
 
-  }
+  ngOnInit() { }
 
-  ngOnInit() {
-
+  make() {
+    this.confirm.emit();
   }
 
 }

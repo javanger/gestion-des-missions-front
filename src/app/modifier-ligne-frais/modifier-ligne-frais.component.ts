@@ -17,13 +17,13 @@ export class ModifierLigneFraisComponent implements OnInit {
   frais: LigneDeFrais;
 
   constructor(private _noteDeFraisService: NoteDeFraisService) {
-    
+
   }
-  
+
   ngOnInit() {
-    
+    this.frais = new LigneDeFrais();
     console.log("id frais: " + this.idFrais);
-    
+
     this._noteDeFraisService.listerNatures().subscribe(list => this.natures = list);
     // this.frais.date = this.ancienfrais.date;
     // this.frais.id = this.ancienfrais.id;

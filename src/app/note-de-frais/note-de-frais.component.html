@@ -60,14 +60,14 @@
           <td>{{ ligne.nature }}</td>
           <td>{{ ligne.montant | currency:'EUR':'0.2' }}</td>
           <td>
-            <app-modifier-ligne-frais [mission]="mission" [note]="note" [idFrais]="ligne.id" ></app-modifier-ligne-frais>
+            <app-modifier-ligne-frais [mission]="mission" [note]="note" [idFrais]="ligne.id"></app-modifier-ligne-frais>
             &nbsp;
-            <span class="badge badge-primary" (click)="delete(ligne.id)">Supprimer</span>
+            <app-popup-confirmation (confirm)="delete(ligne.id)" [message]="'Voulez-vous vraiment supprimer ?'" [actionLabel]="'Supprimer'"></app-popup-confirmation>
           </td>
         </tr>
       </tbody>
     </table>
     <app-ajouter-ligne-de-frais [mission]="mission" [note]="note"></app-ajouter-ligne-de-frais>
-    
+
   </div>
 </div>

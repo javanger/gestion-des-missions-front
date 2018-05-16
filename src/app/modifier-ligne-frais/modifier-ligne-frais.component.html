@@ -1,4 +1,4 @@
-<span class="badge badge-primary" (click)="modalModifierFrais.show()">Modifier</span>
+<span class="badge badge-primary" style="cursor: pointer;" (click)="modalModifierFrais.show()">Modifier</span>
 
 <div mdbModal #modalModifierFrais="mdb-modal" class="modal fade bottom" id="fullHeightModalRight" tabindex="-1" role="dialog"
   aria-labelledby="myModalLabel" aria-hidden="true">
@@ -11,8 +11,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <form (ngSubmit)="modifier(modifierFraisForm.value)" #modifierFraisForm="ngForm" name="form-modifier-ligne-de-frais"
-          id="form-modifier-ligne-de-frais">
+        <form (ngSubmit)="modifier(modifierFraisForm.value)" #modifierFraisForm="ngForm" name="form-modifier-ligne-de-frais" id="form-modifier-ligne-de-frais">
           <div class="">
             <label for="dateFrais">Date</label>
             <input id="dateFrais" #dateFrais="ngModel" [(ngModel)]="frais.date" name="date" type="date" class="form-control" placeholder="jj/mm/aaaa"
