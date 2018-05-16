@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { Nature } from '../models';
+import { NatureService } from '../services/nature.service';
 
 @Component({
   selector: 'app-demo-nature',
@@ -7,9 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DemoNatureComponent implements OnInit {
 
-  constructor() { }
+  @Input() listeNatures : Array<Nature>;
+
+  constructor(private serviceNature: NatureService) { }
 
   ngOnInit() {
+    this.serviceNature.listerNatures().subscribe((data:any) => {
+      this.listeNatures = data;
+    })
   }
 
 }

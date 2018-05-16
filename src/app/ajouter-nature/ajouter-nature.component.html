@@ -1,93 +1,119 @@
-<form (ngSubmit)="submit()">
-  <p class="h5 text-center mb-4">Création d'une nature</p>
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" (click)="exampleModal.show()" data-target="#exampleModal">
+  Ajouter une nature
+</button>
 
-  <div class="row justify-content-md-center">
-    <div class="col-lg-3 mb-3">
-
-      <label for="libelle">Libellé</label>
-      <input type="text" id="libelle" class="form-control" mdbActive mdbInputDirective [(ngModel)]="newNature.libelle" name="libelle"
-        #libelle="ngModel" minlength="3" required>
-
-      <div [hidden]="!libelle.valid" class="alert alert-danger">
-        <div [hidden]="!libelle.hasError('minlength')">Le libellé doit être supérieur à 3 caractères</div>
+<!-- Modal -->
+<div class="modal fade" style="overflow: auto;" mdbModal #exampleModal="mdb-modal" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Création d'une nature</h5>
+        <button type="button" class="close" data-dismiss="modal" (click)="exampleModal.hide()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
       </div>
+      <div class="modal-body">
 
-    </div>
-  </div>
+        <form (ngSubmit)="submit()">
 
-  <div class="row justify-content-md-center">
-    <div class="col-lg-3 mb-3">
+          <div class="row justify-content-md-center">
+            <div class="col-lg-10 mb-3">
 
-      <label for="estFacturee">Facturée</label>
-      <select class="form-control" id="estFacturee" (change)="choixEstFacturee()" mdbActive mdbInputDirective [(ngModel)]="newNature.estFacturee"
-        name="estFacturee" #versementPrime="ngModel">
-        <option selected value="true">Oui</option>
-        <option value="false">Non</option>
-      </select>
+              <label for="libelle">Libellé</label>
+              <input type="text" id="libelle" class="form-control" mdbActive mdbInputDirective [(ngModel)]="newNature.libelle" name="libelle"
+                #libelle="ngModel" minlength="3" required>
 
-    </div>
-  </div>
+              <div [hidden]="!libelle.valid" class="alert alert-danger">
+                <div [hidden]="libelle.hasError('minlength')">Le libellé doit être supérieur à 3 caractères</div>
+              </div>
 
-  <div *ngIf="afficherFacturation()">
-
-    <div class="row justify-content-md-center">
-      <div class="col-lg-3 mb-3">
-
-        <label for="tjm">TJM (en €)</label>
-        <input type="number" id="tjm" class="form-control" mdbActive mdbInputDirective [(ngModel)]="newNature.tjm" name="tjm" #libelle="ngModel">
-
-      </div>
-    </div>
-
-    <div class="row justify-content-md-center">
-      <div class="col-lg-3 mb-3">
-
-        <label for="versementPrime">Versement prime</label>
-
-        <select class="form-control" (change)="choixVersementPrime($event)" mdbActive mdbInputDirective [(ngModel)]="newNature.versementPrime"
-          name="versementPrime" #versementPrime="ngModel">
-          <option selected value="true">Oui</option>
-          <option value="false">Non</option>
-        </select>
-
-      </div>
-    </div>
-
-  </div>
-
-  <div *ngIf="afficherPourcentagePrime()">
-    <div class="row justify-content-md-center">
-      <div class="col-lg-3 mb-3">
-
-        <label for="pourcentagePrime">Pourcentage prime</label>
-        <input type="number" id="pourcentagePrime" class="form-control" (blur)="verifiePourcentagePrime($event.target.value)" pattern="^$|^([0-9]|[1][0])?"
-          mdbActive mdbInputDirective [(ngModel)]="newNature.pourcentagePrime" name="pourcentagePrime" #pourcentagePrime="ngModel">
-
-        <div *ngIf="pourcentagePrime.errors">
-          <div [hidden]="!pourcentagePrime.errors.pattern">
-            Le pourcentage doit être compris entre 0 et 10.
+            </div>
           </div>
-        </div>
+
+          <div class="row justify-content-md-center">
+            <div class="col-lg-10 mb-3">
+
+              <label for="estFacturee">Facturée</label>
+              <select class="form-control" id="estFacturee" (change)="choixEstFacturee()" mdbActive mdbInputDirective [(ngModel)]="newNature.estFacturee"
+                name="estFacturee" #versementPrime="ngModel">
+                <option selected value="true">Oui</option>
+                <option value="false">Non</option>
+              </select>
+
+            </div>
+          </div>
+
+          <div *ngIf="afficherFacturation()">
+
+            <div class="row justify-content-md-center">
+              <div class="col-lg-10 mb-3">
+
+                <label for="tjm">TJM (en €)</label>
+                <input type="number" id="tjm" class="form-control" mdbActive mdbInputDirective [(ngModel)]="newNature.tjm" name="tjm" #libelle="ngModel">
+
+              </div>
+            </div>
+
+            <div class="row justify-content-md-center">
+              <div class="col-lg-10 mb-3">
+
+                <label for="versementPrime">Versement prime</label>
+
+                <select class="form-control" (change)="choixVersementPrime($event)" mdbActive mdbInputDirective [(ngModel)]="newNature.versementPrime"
+                  name="versementPrime" #versementPrime="ngModel">
+                  <option selected value="true">Oui</option>
+                  <option value="false">Non</option>
+                </select>
+
+              </div>
+            </div>
+
+          </div>
+
+          <div *ngIf="afficherPourcentagePrime()">
+            <div class="row justify-content-md-center">
+              <div class="col-lg-10 mb-3">
+
+                <label for="pourcentagePrime">Pourcentage prime</label>
+                <input type="number" id="pourcentagePrime" class="form-control" (blur)="verifiePourcentagePrime($event.target.value)" pattern="^$|^([0-9]|[1][0])?"
+                  mdbActive mdbInputDirective [(ngModel)]="newNature.pourcentagePrime" name="pourcentagePrime" #pourcentagePrime="ngModel">
+
+                <div *ngIf="pourcentagePrime.errors">
+                  <div [hidden]="!pourcentagePrime.errors.pattern">
+                    Le pourcentage doit être compris entre 0 et 10.
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          <div class="row justify-content-md-center">
+            <div class="col-lg-10 mb-3">
+
+              <label for="dateFin">Date de fin</label>
+              <input type="date" id="dateFin" class="form-control" mdbActive mdbInputDirective [(ngModel)]="newNature.dateFin" name="dateFin"
+                #nom="ngModel">
+
+            </div>
+          </div>
+
+          <div class="text-center">
+
+          </div>
+
+        </form>
+
+      </div>
+      <div class="modal-footer">
+
+        <button type="submit" class="btn btn-unique waves-light" mdbWavesEffect (click)="exampleModal.hide()">Annuler
+        </button>
+        <button type="submit" class="btn btn-unique waves-light" [disabled]="!(libelle.valid)" mdbWavesEffect>Ajouter
+        </button>
 
       </div>
     </div>
   </div>
-
-
-  <div class="row justify-content-md-center">
-    <div class="col-lg-3 mb-3">
-
-      <label for="dateFin">Date de fin</label>
-      <input type="date" id="dateFin" class="form-control" mdbActive mdbInputDirective [(ngModel)]="newNature.dateFin" name="dateFin"
-        #nom="ngModel">
-
-    </div>
-  </div>
-
-  <div class="text-center">
-    <button type="submit" class="btn btn-unique waves-light" mdbWavesEffect>Annuler
-    </button>
-    <button type="submit" class="btn btn-unique waves-light" [disabled]="!(libelle.valid)" mdbWavesEffect>Ajouter
-    </button>
-  </div>
-</form>

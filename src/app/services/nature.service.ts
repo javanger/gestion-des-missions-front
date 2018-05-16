@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { Nature } from '../models';
 import { HttpClient } from '@angular/common/http';
 import { HttpHeaders } from "@angular/common/http";
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/map';
 
 const URL_API = "http://localhost:8080/api/natures"
 
@@ -10,18 +12,19 @@ export class NatureService {
 
   constructor(private _http: HttpClient) { }
 
-  listerNatures(): Promise<Nature[]> {
-    return new Promise((done, left) => {
+  listerNatures(): Observable<Nature[]> {
 
-      // récupérer la liste des natures côté serveur
-      this._http.get(URL_API)
-        .toPromise()
-        .then((data: any) => {
-          done(data);
-        }, (error: any) => {
-          left(error);
-        });
-    });
+    // récupérer la liste des nature côté serveur
+    return this._http.get(URL_API)
+
+      .map((data: any) => {
+        return data.map((s: any) => new Nature(s));
+      }, (error: any) => {
+
+        // Cas d'erreur
+        
+      });
+
   };
 
   sendNature(nature: Nature): Promise<Nature> {
@@ -64,5 +67,9 @@ export class NatureService {
 
         });
     });
+  }
+
+  deleteNature(id: number){
+
   }
 }
