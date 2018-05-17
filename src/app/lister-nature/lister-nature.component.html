@@ -23,9 +23,9 @@
       <td>{{nature.tjm}}</td>
       <td>{{nature.dateFin | dateFormat}}</td>
       <td>
-        <span>
-          <i class="fa fa-trash-o" aria-hidden="true"></i>
-        </span>
+        <a class="btn btn-sm btn-outline-danger" (click)="supression(nature)" mdbWavesEffect>
+            <i class="fa fa-trash-o" aria-hidden="true" ></i>
+        </a>
       </td>
     </tr>
 
