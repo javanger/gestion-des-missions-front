@@ -1,0 +1,99 @@
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" (click)="exampleModal.show()" data-target="#exampleModal">
+  Demande de mission
+</button>
+
+<!-- Modal -->
+<div class="modal fade" style="overflow: auto;" mdbModal #exampleModal="mdb-modal" id="exampleModal" tabindex="-1" role="dialog"
+  aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Demande de mission</h5>
+        <button type="button" class="close" data-dismiss="modal" (click)="exampleModal.hide()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+        <form (ngSubmit)="submit()" name="form-demande-mission" id="form-demande-mission">
+
+          <div class="row justify-content-md-center">
+            <div class="col-lg-10 mb-3">
+
+              <label for="dateDebut">Date de début</label>
+              <input type="date" id="dateDebut" class="form-control" mdbActive mdbInputDirective [(ngModel)]="newMission.dateDebut" name="dateDebut"
+                #nom="ngModel">
+
+            </div>
+          </div>
+
+          <div class="row justify-content-md-center">
+            <div class="col-lg-10 mb-3">
+
+              <label for="dateFin">Date de fin</label>
+              <input type="date" id="dateFin" class="form-control" mdbActive mdbInputDirective [(ngModel)]="newMission.datFin" name="dateFin"
+                #nom="ngModel">
+
+            </div>
+          </div>
+
+          <div class="row justify-content-md-center">
+            <div class="col-lg-10 mb-3">
+
+              <label for="nature">Quelle nature ?</label>
+              <select id="nature" #nature="ngModel" class="custom-select" name="nature" [(ngModel)]="newMission.nature" required mdbActive>
+                <option *ngFor="let n of natures" [ngValue]="n">{{ n.libelle }}</option>
+              </select>
+
+            </div>
+          </div>
+
+          <div class="row justify-content-md-center">
+            <div class="col-lg-10 mb-3">
+
+              <label for="villeDepart">Ville de départ</label>
+              <input type="text" id="villeDepart" class="form-control" mdbActive mdbInputDirective [(ngModel)]="newMission.villeDepart"
+                name="villeDepart" #libelle="ngModel" minlength="3" required>
+
+            </div>
+          </div>
+
+          <div class="row justify-content-md-center">
+            <div class="col-lg-10 mb-3">
+
+              <label for="villeArrivee">Ville d'arrivée</label>
+              <input type="text" id="villeArrivee" class="form-control" mdbActive mdbInputDirective [(ngModel)]="newMission.villeArrivee"
+                name="villeArrivee" #libelle="ngModel" minlength="3" required>
+
+            </div>
+          </div>
+
+          <div class="row justify-content-md-center">
+            <div class="col-lg-10 mb-3">
+
+              <label for="nature">Quelle transport ?</label>
+              <select id="transport" #transport="ngModel" class="custom-select" name="transport" [(ngModel)]="newMission.transport" required mdbActive>
+                <option *ngFor="let t of transports" [ngValue]="n">{{ t }}</option>
+              </select>
+
+            </div>
+          </div>
+
+          <div class="text-center">
+
+          </div>
+
+        </form>
+
+      </div>
+      <div class="modal-footer">
+
+        <button class="btn btn-unique waves-light" mdbWavesEffect (click)="exampleModal.hide()">Annuler
+        </button>
+        <button type="submit" form="form-demande-mission" class="btn btn-unique waves-light" mdbWavesEffect>Ajouter
+        </button>
+
+      </div>
+    </div>
+  </div>

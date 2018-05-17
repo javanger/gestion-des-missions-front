@@ -28,6 +28,7 @@ import { PourcentagePrimePipe } from './pipes/pourcentage-prime.pipe';
 import { ListerMissionsComponent } from './lister-missions/lister-missions.component';
 import { MissionService } from './services/mission.service';
 import { EnumToStringPipe } from './pipes/enum-to-string.pipe';
+import { DemanderMissionsComponent } from './demander-missions/demander-missions.component';
 
 const appRoutes: Routes = [
   { path: 'accueil', component: AccueilComponent },
@@ -60,7 +61,8 @@ const appRoutes: Routes = [
     PourcentagePrimePipe,
     GestionFraisComponent,
     ListerMissionsComponent,
-    EnumToStringPipe
+    EnumToStringPipe,
+    DemanderMissionsComponent
   ],
   imports: [
     BrowserModule,
