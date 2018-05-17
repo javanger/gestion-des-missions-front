@@ -25,16 +25,20 @@ import { ConnexionService } from './services/connexion.service';
 import { AuthInterceptor } from './services/auth-interceptor.service';
 import { ListerNatureComponent } from './lister-nature/lister-nature.component';
 import { PourcentagePrimePipe } from './pipes/pourcentage-prime.pipe';
+import { ListerMissionsComponent } from './lister-missions/lister-missions.component';
+import { MissionService } from './services/mission.service';
+import { EnumToStringPipe } from './pipes/enum-to-string.pipe';
 
 const appRoutes: Routes = [
-  { path: 'accueil', component: AccueilComponent }, // /page1 affiche le composant A
+  { path: 'accueil', component: AccueilComponent },
   { path: 'connexion', component: ConnexionComponent },
   { path: 'demo', component: DemoNoteDeFraisComponent },
   { path: 'saisieNoteFrais', component: GestionFraisComponent },
+  { path: 'gestionMission', component: ListerMissionsComponent },
   { path: 'natureMission', component: ListerNatureComponent },
   { path: 'gestion-frais/details', component: NoteDeFraisComponent },
   { path: 'gestion-frais/details/nouveau-frais', component: AjouterLigneDeFraisComponent },
-  { path: '',   redirectTo: '/accueil', pathMatch: 'full' } // redirige vers la route page1 par défaut
+  { path: '',   redirectTo: '/accueil', pathMatch: 'full' } // redirige vers la route Accueil par défaut
 ]
 
 @NgModule({
@@ -54,7 +58,9 @@ const appRoutes: Routes = [
     GestionFraisComponent,
     ListerNatureComponent,
     PourcentagePrimePipe,
-    GestionFraisComponent
+    GestionFraisComponent,
+    ListerMissionsComponent,
+    EnumToStringPipe
   ],
   imports: [
     BrowserModule,
@@ -67,7 +73,8 @@ const appRoutes: Routes = [
     { provide: HTTP_INTERCEPTORS, useClass:AuthInterceptor, multi: true },
     ConnexionService,
     NatureService,
-    NoteDeFraisService
+    NoteDeFraisService,
+    MissionService
   ],
   bootstrap: [AppComponent]
 })
