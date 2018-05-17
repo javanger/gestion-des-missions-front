@@ -1,0 +1,35 @@
+<table class="table">
+
+  <!--Table head-->
+  <thead>
+    <tr>
+      <th>Libellé</th>
+      <th>Facturation</th>
+      <th>Versement prime</th>
+      <th>Pourcentage prime</th>
+      <th>TJM</th>
+      <th>Date de fin</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+
+    <tr *ngFor="let nature of listeNatures">
+      <td>{{nature.libelle}}</td>
+      <td>{{nature.estFacturee | booleanFormat}}</td>
+      <td>{{nature.aUnePrime | booleanFormat}}</td>
+      <td>{{nature.pourcentagePrime | pourcentagePrime}}</td>
+      <td>{{nature.tjm}}</td>
+      <td>{{nature.dateFin | dateFormat}}</td>
+      <td>
+        <span>
+          <i class="fa fa-trash-o" aria-hidden="true"></i>
+        </span>
+      </td>
+    </tr>
+
+  </tbody>
+</table>
+
+<app-ajouter-nature></app-ajouter-nature>
