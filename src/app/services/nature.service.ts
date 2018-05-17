@@ -24,7 +24,6 @@ export class NatureService {
       .map((data: any) => {
         return data.map((s: any) => new Nature(s));
       })
-      .do((data: any) => this.actualiserSub.next(data));
   };
 
   sendNature(nature: Nature):Observable<Nature[]>{
