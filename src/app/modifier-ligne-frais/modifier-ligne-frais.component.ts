@@ -28,7 +28,7 @@ export class ModifierLigneFraisComponent implements OnInit {
     this._noteDeFraisService.listerNatures().subscribe(list => this.natures = list);
   }
 
-  modifier(ligne: LigneDeFrais) {
+  modifier() {
 
     // reinitialiser le message
     this.message = "";
