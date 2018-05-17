@@ -23,11 +23,16 @@ import { AccueilComponent } from './page/accueil/accueil.component';
 import { ConnexionComponent } from './page/connexion/connexion.component';
 import { ConnexionService } from './services/connexion.service';
 import { AuthInterceptor } from './services/auth-interceptor.service';
+
+import { PopupConfirmationComponent } from './popup-confirmation/popup-confirmation.component';
+import { ModifierLigneFraisComponent } from './modifier-ligne-frais/modifier-ligne-frais.component';
+
 import { ListerNatureComponent } from './lister-nature/lister-nature.component';
 import { PourcentagePrimePipe } from './pipes/pourcentage-prime.pipe';
 import { ListerMissionsComponent } from './lister-missions/lister-missions.component';
 import { MissionService } from './services/mission.service';
 import { EnumToStringPipe } from './pipes/enum-to-string.pipe';
+
 
 const appRoutes: Routes = [
   { path: 'accueil', component: AccueilComponent },
@@ -56,11 +61,14 @@ const appRoutes: Routes = [
     NoteDeFraisComponent,
     AjouterLigneDeFraisComponent,
     GestionFraisComponent,
+    PopupConfirmationComponent,
+    ModifierLigneFraisComponent,
     ListerNatureComponent,
     PourcentagePrimePipe,
     GestionFraisComponent,
     ListerMissionsComponent,
     EnumToStringPipe
+
   ],
   imports: [
     BrowserModule,
@@ -70,7 +78,7 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes)
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass:AuthInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
     ConnexionService,
     NatureService,
     NoteDeFraisService,

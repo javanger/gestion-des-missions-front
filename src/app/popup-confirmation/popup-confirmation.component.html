@@ -1,0 +1,26 @@
+<span class="badge badge-warning" style="cursor: pointer;" (click)="confirm.show()"> {{ actionLabel }}</span>
+
+
+<div mdbModal #confirm="mdb-modal" class="modal fade" id="centralModalSuccess" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-notify modal-danger" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <p class="heading lead">Confirmation</p>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="confirm.hide()">
+                    <span aria-hidden="true" class="white-text">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="text-center">
+                    <i class="fa fa-check fa-4x mb-3 animated rotateIn"></i>
+                    <p>{{ message }}</p>
+                </div>
+            </div>
+            <div class="modal-footer justify-content-center">
+                <a type="button" class="btn btn-primary waves-light" (click)="confirm.hide();make();" mdbWavesEffect>Oui</a>
+                <a type="button" class="btn btn-outline-secondary" data-dismiss="modal" (click)="confirm.hide()" mdbWavesEffect>Non</a>
+            </div>
+        </div>
+    </div>
+</div>

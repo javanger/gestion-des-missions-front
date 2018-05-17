@@ -1,23 +1,21 @@
-<button type="button" class="btn btn-sm btn-primary waves-light" data-toggle="modal" data-target="#basicExample" (click)="modalAjoutFrais.show()"
-  mdbWavesEffect>
-  Ajouter un frais
-</button>
-<div mdbModal #modalAjoutFrais="mdb-modal" class="modal fade bottom" id="fullHeightModalRight1" tabindex="-1" role="dialog"
+<span class="badge badge-primary" style="cursor: pointer;" (click)="modalModifierFrais.show()">Modifier</span>
+
+<div mdbModal #modalModifierFrais="mdb-modal" class="modal fade bottom" id="fullHeightModalRight" tabindex="-1" role="dialog"
   aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-md modal-bottom" role="document">
     <div class="modal-content">
       <div class="modal-header card-header primary-color white-text">
-        <h4 class="modal-title w-100" id="myModalLabel">Ajout d'une ligne de frais</h4>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="modalAjoutFrais.hide()">
+        <h4 class="modal-title w-100" id="myModalLabel">Modifier une ligne de frais</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="modalModifierFrais.hide()">
           <span aria-hidden="true">×</span>
         </button>
       </div>
       <div class="modal-body">
-        <form (ngSubmit)="submit(ajouterFraisForm.value, modalAjoutFrais)" #ajouterFraisForm="ngForm" name="form-ajouter-ligne-de-frais"
-          id="form-ajouter-ligne-de-frais">
+        <form #modifierFraisForm="ngForm" name="form-modifier-ligne-de-frais" id="form-modifier-ligne-de-frais">
+          <input type="hidden" name="id" [(ngModel)]="frais.id">
           <div class="">
             <label for="dateFrais">Date</label>
-            <input id="dateFrais" #dateFrais="ngModel" [(ngModel)]="frais.date" name="date" type="date" class="form-control" placeholder="jj/mm/aaaa"
+            <input id="dateFrais" #dateFrais="ngModel" [(ngModel)]="frais.date" name="date" type="date" class="form-control" placeholder="mm/jj/aaaa"
               required mdbActive min="{{ mission.dateDebut }}" max="{{ mission.dateFin }}">
           </div>
           <div class="">
@@ -40,10 +38,10 @@
         </div>
       </div>
       <div class="modal-footer justify-content-center">
-        <button type="button" class="btn btn-sm btn-outline-primary waves-light" data-dismiss="modal" (click)="modalAjoutFrais.hide()"
+        <button type="button" class="btn btn-sm btn-outline-primary waves-light" data-dismiss="modal" (click)="modalModifierFrais.hide()"
           mdbWavesEffect>Annuler</button>
-        <button form="form-ajouter-ligne-de-frais" type="submit" class="btn btn-sm btn-outline-default waves-light" [disabled]="!(dateFrais.valid && natureFrais.valid && montantFrais.valid)"
-          mdbWavesEffect mdbActive>Enregistrer</button>
+        <button form="form-modifier-ligne-de-frais" type="submit" class="btn btn-sm btn-outline-default waves-light" [disabled]="!(dateFrais.valid && natureFrais.valid && montantFrais.valid)"
+          mdbWavesEffect mdbActive (click)="modifier()" >Enregistrer</button>
       </div>
     </div>
   </div>

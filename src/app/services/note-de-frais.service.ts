@@ -15,16 +15,17 @@ export class NoteDeFraisService {
   // création d'une instance de Subject
   // le subject est privé, seul le service NoteDeFraisService peut émettre une valeur
   // <string> désigne la nature de la donnée à notifier
-  private _ajoutFrais = new Subject<LigneDeFrais>();
+  ajouterFraisSubject = new Subject<LigneDeFrais>();
+  supprimerFraisSubject = new Subject<string>();
 
   constructor(private _http: HttpClient) { }
 
   // création d'une propriété publique
   // accessible en dehors du service
   // seule l'interface Observable du Subject est exposée
-  get ajoutFraisSubject(): Observable<LigneDeFrais> {
-    return this._ajoutFrais.asObservable();
-  }
+/*  get fraisSubject(): Observable<LigneDeFrais> {
+    return this._fraisSubj.asObservable();
+  } */
 
   /**
    * Récupérer la liste des nature de frais
@@ -41,10 +42,21 @@ export class NoteDeFraisService {
    * @param idNote 
    * @returns Observable<LigneDeFrais> 
    */
-  ajouterFrais(frais: LigneDeFrais, idNote: string): void {
+  ajouterFrais(frais: LigneDeFrais, idNote: string): Observable<LigneDeFrais | any> {
     const URL_API = environment.apiUrl + "api/notes/" + idNote + "/frais";
-    this._http.post<LigneDeFrais>(URL_API, frais).subscribe(frais => this._ajoutFrais.next(frais));
+    return this._http.post<LigneDeFrais>(URL_API, frais);
   }
+
+  /**
+ * Modifier le frais
+ * @param frais 
+ * @returns Observable<LigneDeFrais> 
+ */
+  modifierFrais(frais: LigneDeFrais): Observable<LigneDeFrais | any> {
+    const URL_API = environment.apiUrl + "api/notes/frais";
+    return this._http.put<LigneDeFrais>(URL_API, frais);
+  }
+
 
   /**
    * Récupérer les missions du collaborateur authentifié
@@ -72,7 +84,31 @@ export class NoteDeFraisService {
    * @return Observable<NoteDeFrais>
    */
   recupererFraisAvecNote(id: string): Observable<NoteDeFrais> {
-    const URL_API = environment.apiUrl + "api/notes/mission/" + id;
+    const URL_API = environment.apiUrl + "api/notes/missions/" + id;
     return this._http.get<NoteDeFrais>(URL_API);
+  }
+
+
+  /**
+   * Récupérer une ligne de frais par son id
+   * @param id 
+   * @return Observable<string>
+   */
+  recupererLigneFrais(id: string): Observable<LigneDeFrais> {
+    const URL_API = environment.apiUrl + "api/notes/frais/" + id;
+    return this._http.get<LigneDeFrais>(URL_API);
+  }
+
+
+
+
+  /**
+   * Supprimer une ligne de frais via son id
+   * @param id 
+   * @return Observable<string>
+   */
+  supprimerLigneFrais(id: string): Observable<String> {
+    const URL_API = environment.apiUrl + "api/notes/frais/" + id;
+    return this._http.delete<string>(URL_API);
   }
 }
