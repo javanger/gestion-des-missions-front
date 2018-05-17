@@ -1,6 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Nature } from '../models';
 import { NatureService } from '../services/nature.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-ajouter-nature',
@@ -13,7 +14,7 @@ export class AjouterNatureComponent implements OnInit {
   estFacturee: boolean = false;
   versementPrime: boolean = false;
 
-  constructor(private serviceNature: NatureService) { }
+  constructor(private serviceNature: NatureService, private router: Router) { }
 
   ngOnInit() {
     this.newNature.estFacturee = false;
@@ -53,7 +54,11 @@ export class AjouterNatureComponent implements OnInit {
   }
 
   submit() {
-    this.serviceNature.sendNature(this.newNature);
+    this.serviceNature.sendNature(this.newNature).subscribe(() =>{
+      this.router.navigate(['/natureMission'])
+    },(error) =>{
+      alert('La nature existe déjà');
+    });
   }
 
 }
