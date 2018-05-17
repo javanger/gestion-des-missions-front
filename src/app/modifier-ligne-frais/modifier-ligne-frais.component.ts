@@ -34,17 +34,17 @@ export class ModifierLigneFraisComponent implements OnInit {
     this.message = "";
     // vérifier la valeur des champs
     console.log(JSON.stringify(this.frais));
-    console.log(JSON.stringify(ligne));
-    if (this._verifierDate(ligne.date) && this._verifierMontant(ligne.montant) && this._verifierNature(ligne.nature)) {
+
+    if (this._verifierDate(this.frais.date) && this._verifierMontant(this.frais.montant) && this._verifierNature(this.frais.nature)) {
       // envoyer l'objet au serveur pour l'ajouter en base
-      /* this._noteDeFraisService.modifierFrais(this.frais)
-         .subscribe(
-           frais => {
-             location.reload();
-           }, fail => {
-             this.message = fail.error.message;
-           }
-         );*/
+      this._noteDeFraisService.modifierFrais(this.frais)
+        .subscribe(
+          frais => {
+            location.reload();
+          }, fail => {
+            this.message = fail.error.message;
+          }
+        );
 
 
       console.log("modification :)");

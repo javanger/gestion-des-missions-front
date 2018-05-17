@@ -18,14 +18,21 @@ export class NoteDeFraisComponent implements OnInit {
   public mission: MissionDetailsFrais = new MissionDetailsFrais();
   public note: NoteDeFrais = new NoteDeFrais();
   private ajoutFrais: Subscription;
+  private supprimerFrais: Subscription;
   currentId: string;
-  //@Output() clickDelete:EventEmitter<number> = new EventEmitter<number>();
 
   constructor(private _fraisServ: NoteDeFraisService, private _router: ActivatedRoute) {
-    this.ajoutFrais = this._fraisServ.ajoutFraisSubject.subscribe(
+    this.ajoutFrais = this._fraisServ.ajouterFraisSubject.subscribe(
       (frais: LigneDeFrais) => {
         // ajouter le nouveau frais à la liste
         this.note.items.push(frais);
+      }
+    );
+
+    this.supprimerFrais = this._fraisServ.supprimerFraisSubject.subscribe(
+      (id: string) => {
+        // ajouter le nouveau frais à la liste
+        this.note.items = this.note.items.filter(f => f.id != id);;
       }
     );
   }
@@ -43,8 +50,12 @@ export class NoteDeFraisComponent implements OnInit {
 
   delete(id: string): void {
     this._fraisServ.supprimerLigneFrais(id).subscribe(
-      success => location.reload(),
-      fail => location.reload()
+      success => { 
+        //location.reload();
+       // this._fraisServ.supprimerFraisSubject.next(id);
+      },
+      fail => //location.reload()
+      this._fraisServ.supprimerFraisSubject.next(id)
     );
   }
 

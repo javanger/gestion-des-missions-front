@@ -38,7 +38,8 @@ export class AjouterLigneDeFraisComponent implements OnInit {
       this._noteDeFraisService.ajouterFrais(frais, this.note.id)
         .subscribe(
           frais => {
-            location.reload();                                                                                                                                                                                                                                                                                                                                                                                                                                                           
+            this._noteDeFraisService.ajouterFraisSubject.next(frais);
+            //location.reload();                                                                                                                                                                                                                                                                                                                                                                                                                                                           
             modal.hide(); 
           }, fail => {
             this.message = fail.error.message;

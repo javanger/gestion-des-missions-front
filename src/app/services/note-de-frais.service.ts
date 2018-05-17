@@ -15,16 +15,17 @@ export class NoteDeFraisService {
   // création d'une instance de Subject
   // le subject est privé, seul le service NoteDeFraisService peut émettre une valeur
   // <string> désigne la nature de la donnée à notifier
-  private _ajoutFrais = new Subject<LigneDeFrais>();
+  ajouterFraisSubject = new Subject<LigneDeFrais>();
+  supprimerFraisSubject = new Subject<string>();
 
   constructor(private _http: HttpClient) { }
 
   // création d'une propriété publique
   // accessible en dehors du service
   // seule l'interface Observable du Subject est exposée
-  get ajoutFraisSubject(): Observable<LigneDeFrais> {
-    return this._ajoutFrais.asObservable();
-  }
+/*  get fraisSubject(): Observable<LigneDeFrais> {
+    return this._fraisSubj.asObservable();
+  } */
 
   /**
    * Récupérer la liste des nature de frais

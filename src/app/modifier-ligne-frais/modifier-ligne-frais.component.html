@@ -11,12 +11,12 @@
         </button>
       </div>
       <div class="modal-body">
-        <form (ngSubmit)="modifier(modifierFraisForm.value)" #modifierFraisForm="ngForm" name="form-modifier-ligne-de-frais" id="form-modifier-ligne-de-frais">
+        <form #modifierFraisForm="ngForm" name="form-modifier-ligne-de-frais" id="form-modifier-ligne-de-frais">
           <input type="hidden" name="id" [(ngModel)]="frais.id">
           <div class="">
             <label for="dateFrais">Date</label>
-            <input id="dateFrais" #dateFrais="ngModel" [(ngModel)]="frais.date" name="date" type="date" class="form-control" placeholder="jj/mm/aaaa"
-              required mdbActive>
+            <input id="dateFrais" #dateFrais="ngModel" [(ngModel)]="frais.date" name="date" type="date" class="form-control" placeholder="mm/jj/aaaa"
+              required mdbActive min="{{ mission.dateDebut }}" max="{{ mission.dateFin }}">
           </div>
           <div class="">
             <label for="natureFrais">Quelle nature ?</label>
@@ -41,7 +41,7 @@
         <button type="button" class="btn btn-sm btn-outline-primary waves-light" data-dismiss="modal" (click)="modalModifierFrais.hide()"
           mdbWavesEffect>Annuler</button>
         <button form="form-modifier-ligne-de-frais" type="submit" class="btn btn-sm btn-outline-default waves-light" [disabled]="!(dateFrais.valid && natureFrais.valid && montantFrais.valid)"
-          mdbWavesEffect mdbActive>Enregistrer</button>
+          mdbWavesEffect mdbActive (click)="modifier()" >Enregistrer</button>
       </div>
     </div>
   </div>
