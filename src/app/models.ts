@@ -1,3 +1,17 @@
+export class Nature {
+
+    libelle: string;
+    estFacturee: boolean;
+    versementPrime: boolean;
+    tjm: string;
+    pourcentagePrime: string;
+    dateFin: Date;
+
+    constructor(obj: any) {
+        Object.assign(this, obj);
+    }
+}
+
 export class NatureMission {
 
     constructor(
@@ -30,7 +44,8 @@ export class MissionDetailsFrais {
         public villeArrivee?: string,
         public transport?: string,
         public estimationPrime?: string,
-        public montantFrais?: string
+        public montantFrais?: string,
+        public status?: string
     ) {
         this.montantFrais = "0";
      }

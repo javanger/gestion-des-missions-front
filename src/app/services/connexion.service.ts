@@ -24,8 +24,7 @@ export class ConnexionService {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/x-www-form-urlencoded'
-      }),
-      withCredentials: true
+      })
      };
      return this._http.post(
       // url d'accès au service
@@ -48,8 +47,7 @@ export class ConnexionService {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/x-www-form-urlencoded'
-      }),
-      withCredentials: true
+      })
      };
      return this._http.get(
       // url d'accès au service
